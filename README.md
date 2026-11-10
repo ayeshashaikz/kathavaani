@@ -26,7 +26,7 @@ flowchart TD
     Chunker -->|Chunks <= 800 chars| CacheCheck{"Audio Cache Hit?"}
     
     CacheCheck -- Yes --> CachedAudio["Read Cached Audio (.wav)"]
-    CacheCheck -- No --> GnaniTTS["Gnani Timbre v2.5 REST API"]
+    CacheCheck -- No --> GnaniTTS["Gnani  REST API"]
     GnaniTTS -->|Binary Audio Stream| SaveCache["Save to Disk Cache (SHA-256)"]
     
     SaveCache --> Stitcher["Audio Stitcher (pydub + ffmpeg)"]
@@ -50,7 +50,7 @@ flowchart TD
    - Respects Gnani Timbre's payload threshold (capped safely under 800 characters).
    - Intelligently splits at natural sentence delimiters across Latin and Indic scripts (periods `.`, exclamation `!`, question marks `?`, and Indic Purna Virama `।`).
 
-3. **Gnani Timbre v2.5 TTS Integration**
+3. **Gnani  TTS Integration**
    - Direct REST integration with `https://api.vachana.ai/api/v1/tts/inference`.
    - Sequential request throttling to respect Gnani's active request policies.
    - Automatic retries with exponential backoff and jitter on HTTP 429 (`RATE_LIMITED`) and transient 5xx errors.
