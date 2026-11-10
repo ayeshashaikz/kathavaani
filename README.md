@@ -47,7 +47,7 @@ flowchart TD
    - Cleans pagination noise, recurring headers, and hyphenated line-breaks.
 
 2. **Sentence-Aware Text Chunking**
-   - Respects Gnani Timbre's payload threshold (capped safely under 800 characters).
+   - Respects Gnani  payload threshold (capped safely under 800 characters).
    - Intelligently splits at natural sentence delimiters across Latin and Indic scripts (periods `.`, exclamation `!`, question marks `?`, and Indic Purna Virama `।`).
 
 3. **Gnani  TTS Integration**
