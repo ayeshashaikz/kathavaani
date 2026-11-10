@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KathaVaani — Vintage Indian Audiobook Parlour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=IM+Fell+English&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+  <!-- Ambient Bookshop Background -->
+  <div class="bookshop-bg">
+    <div class="vignette-overlay"></div>
+    <div class="dust-particles" aria-hidden="true"></div>
+  </div>
+
+  <!-- Main Bookshop Book Container -->
+  <div class="parlour-wrapper">
+    <header class="parlour-header">
+      <div class="parlour-sign">
+        <span class="sign-ornament">✦</span>
+        <h1 class="sign-title">KathaVaani <span class="devanagari-sub"></span></h1>
+        <span class="sign-ornament">✦</span>
+      </div>
+      <p class="parlour-tagline">Vintage Indian Audiobook Parlour • Powered by Gnani ai</p>
+    </header>
+
+    <!-- Stepper Navigation Indicator -->
+    <nav class="book-stepper" id="bookStepper">
+      <div class="step-pip active" data-step="1"><span>I</span> Entrance</div>
+      <div class="step-pip" data-step="2"><span>II</span> Counter</div>
+      <div class="step-pip" data-step="3"><span>III</span> Nook</div>
+      <div class="step-pip" data-step="4"><span>IV</span> Narrator</div>
+      <div class="step-pip" data-step="5"><span>V</span> Binder</div>
+      <div class="step-pip" data-step="6"><span>VI</span> Library</div>
+    </nav>
+
+    <!-- Book Frame with 3D Page Turn Effect -->
+    <main class="book-frame">
+      <div class="book-spine-crease"></div>
+
+      <!-- ================= SCREEN 1: SHOP FRONT ================= -->
+      <section class="screen active" id="screen-1">
+        <div class="parchment-page entrance-page">
+          <div class="page-corner top-left"></div>
+          <div class="page-corner top-right"></div>
+          <div class="page-corner bottom-left"></div>
+          <div class="page-corner bottom-right"></div>
+
+          <div class="entrance-content">
+            <div class="shop-emblem">
+              <img src="/images/background.jpg" alt="Vintage Bookshop" class="entrance-thumb">
+            </div>
+
+            <h2 class="book-title">Step into the Old Bookshop</h2>
+            <div class="ornamental-divider">❧ ✦ ❧</div>
+
+            <p class="literary-prose">
+              Welcome, reader. Here, forgotten paper transforms into living voice.
+              Hand over any manuscript—whether penned in Telugu, Hindi, Tamil, Bengali, Kannada, Marathi, Gujarati,
+              Punjabi, Malayalam, or English—and our storytellers will speak it in its own mother tongue.
+            </p>
+
+            <p class="literary-quote">
+              "No translation. No artificial filters. Only the authentic soul of Indian literature,
+              spoken with the acoustic warmth of Gnani Timbre."
+            </p>
+
+            <div class="entrance-action">
+              <button class="wooden-btn primary-btn" id="btn-enter-shop">
+                <span class="btn-label">Enter the Bookshop 🗝️</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCREEN 2: COUNTER (UPLOAD) ================= -->
+      <section class="screen" id="screen-2">
+        <div class="parchment-page">
+          <div class="page-header">
+            <span class="chapter-num">Chapter I</span>
+            <h2 class="page-heading">The Front Counter</h2>
+            <p class="page-subheading">Hand over your book manuscript (PDF or TXT)</p>
+          </div>
+
+          <div class="counter-layout">
+            <!-- Dropzone Area -->
+            <div class="dropzone" id="dropzone">
+              <input type="file" id="fileInput" accept=".pdf,.txt,.text" hidden>
+              <div class="dropzone-inner">
+                <div class="quill-icon">📜</div>
+                <h3 class="dropzone-title">Lay your manuscript on the counter</h3>
+                <p class="dropzone-desc">Drag & drop a <strong>PDF</strong> or <strong>TXT</strong> file here, or click
+                  to browse</p>
+                <span class="badge-feature">PyMuPDF Text Extraction • Scanned PDF Detection</span>
+              </div>
+            </div>
+
+            <!-- Sample Books Shelf -->
+            <div class="samples-section">
+              <div class="shelf-label">
+                <span>✦ Or pick an antique volume from our shelf ✦</span>
+              </div>
+              <div class="samples-grid" id="samplesGrid">
+                <!-- Dynamically populated sample books -->
+              </div>
+            </div>
+
+            <!-- Docket (Extracted Metadata) -->
+            <div class="manuscript-docket hidden" id="manuscriptDocket">
+              <div class="docket-header">
+                <span class="docket-seal">STAMPED</span>
+                <h4 id="docketTitle">Title of Book</h4>
+                <span class="badge-tag" id="docketFormat">PDF</span>
+              </div>
+              <div class="docket-body">
+                <div class="docket-stat">
+                  <span class="stat-label">Total Pages</span>
+                  <span class="stat-value" id="docketPages">1</span>
+                </div>
+                <div class="docket-stat">
+                  <span class="stat-label">Word Count</span>
+                  <span class="stat-value" id="docketWords">666</span>
+                </div>
+                <div class="docket-stat">
+                  <span class="stat-label">Text Layer</span>
+                  <span class="stat-value text-success" id="docketLayer">Selectable</span>
+                </div>
+              </div>
+              <p class="docket-snippet" id="docketSnippet">Preview of first lines...</p>
+            </div>
+          </div>
+
+          <div class="page-footer-nav">
+            <button class="wooden-btn secondary-btn" data-goto="1">⟵ Back to Entrance</button>
+            <button class="wooden-btn primary-btn" id="btn-proceed-nook" disabled>
+              Inspect Pages & Language ⟶
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCREEN 3: READING NOOK (PAGES & LANGUAGE) ================= -->
+      <section class="screen" id="screen-3">
+        <div class="parchment-page">
+          <div class="page-header">
+            <span class="chapter-num">Chapter II</span>
+            <h2 class="page-heading">The Reading Nook</h2>
+            <p class="page-subheading">Choose your page scope and confirm the book's mother tongue</p>
+          </div>
+
+          <div class="nook-layout">
+            <!-- Page Range Selection -->
+            <div class="nook-card scope-card">
+              <h3 class="nook-card-title">📖 Select Page Scope</h3>
+              <p class="nook-card-desc">Choose which pages our narrator should read aloud (capped to preserve credits):
+              </p>
+
+              <div class="page-slider-wrap">
+                <div class="range-labels">
+                  <span>Start: <strong id="lblStartPage">Page 1</strong></span>
+                  <span>End: <strong id="lblEndPage">Page 1</strong></span>
+                </div>
+                <div class="range-inputs">
+                  <input type="range" id="startPageSlider" min="1" max="1" value="1">
+                  <input type="range" id="endPageSlider" min="1" max="1" value="1">
+                </div>
+                <div class="scope-summary">
+                  Selected <span id="scopePageCount">1 page</span> (<span id="scopeWordCount">~650 words</span>)
+                </div>
+              </div>
+            </div>
+
+            <!-- Spine Shelf (Language Selection) -->
+            <div class="nook-card language-card">
+              <h3 class="nook-card-title">📚 Confirm Book's Mother Tongue</h3>
+              <p class="nook-card-desc">Pull a book spine from the shelf to match your text's native language:</p>
+
+              <div class="book-spine-shelf" id="spineShelf">
+                <!-- Spines generated dynamically -->
+              </div>
+              <div class="selected-lang-display">
+                Selected Language: <strong id="selectedLangName">English (India)</strong>
+                <span class="script-badge" id="selectedLangScript">Latin</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-footer-nav">
+            <button class="wooden-btn secondary-btn" data-goto="2">⟵ Back to Counter</button>
+            <button class="wooden-btn primary-btn" id="btn-proceed-narrator">
+              Choose Storyteller ⟶
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCREEN 4: NARRATOR STUDIO ================= -->
+      <section class="screen" id="screen-4">
+        <div class="parchment-page">
+          <div class="page-header">
+            <span class="chapter-num">Chapter III</span>
+            <h2 class="page-heading">The Narrator Studio</h2>
+            <p class="page-subheading">Select the voice persona to breathe life into your manuscript</p>
+          </div>
+
+          <div class="narrator-cards-grid">
+            <!-- Female Narrator: Kavya -->
+            <div class="narrator-card selected" id="card-narrator_female" data-narrator="narrator_female">
+              <div class="narrator-portrait-wrap">
+                <img src="/images/character1.jpg" alt="Narrator Female Placeholder" class="narrator-portrait">
+                <div class="gilded-frame"></div>
+              </div>
+              <div class="narrator-info">
+                <h3 class="narrator-name">Kavya (काव्या)</h3>
+                <span class="narrator-tag">Feminine Storyteller</span>
+                <p class="narrator-bio">
+                  Warm, expressive, and lyrical storytelling. Nuanced cadence with emotional depth, perfect for poetry,
+                  memoirs, and introspective drama.
+                </p>
+                <div class="narrator-unavail-note hidden" id="note-narrator_female">Not available for the selected
+                  language</div>
+                <button class="preview-btn" data-narrator="narrator_female">
+                  <span class="play-icon">▶</span> Hear a sample
+                </button>
+              </div>
+            </div>
+
+            <!-- Male Narrator: Kabir -->
+            <div class="narrator-card" id="card-narrator_male" data-narrator="narrator_male">
+              <div class="narrator-portrait-wrap">
+                <img src="/images/character2.jpg" alt="Narrator Male Placeholder" class="narrator-portrait">
+                <div class="gilded-frame"></div>
+              </div>
+              <div class="narrator-info">
+                <h3 class="narrator-name">Kabir (कबीर)</h3>
+                <span class="narrator-tag">Masculine Storyteller</span>
+                <p class="narrator-bio">
+                  Deep, calm, and resonant narration. Steady rhythm with grounded authority, ideal for classic
+                  literature, philosophy, and sweeping epics.
+                </p>
+                <div class="narrator-unavail-note hidden" id="note-narrator_male">Not available for the selected
+                  language</div>
+                <button class="preview-btn" data-narrator="narrator_male">
+                  <span class="play-icon">▶</span> Hear a sample
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Speed Dial Controls -->
+          <div class="speed-control-bar">
+            <span class="speed-label">Pacing & Speed:</span>
+            <div class="speed-pills">
+              <button class="speed-pill" data-speed="0.85">0.85x Calm</button>
+              <button class="speed-pill active" data-speed="1.0">1.0x Normal</button>
+              <button class="speed-pill" data-speed="1.15">1.15x Brisk</button>
+            </div>
+          </div>
+
+          <div class="page-footer-nav">
+            <button class="wooden-btn secondary-btn" data-goto="3">⟵ Back to Nook</button>
+            <button class="wooden-btn primary-btn" id="btn-bind-book">
+              Bind Your Audiobook 🧵
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCREEN 5: BINDING STATION (LOADING) ================= -->
+      <section class="screen" id="screen-5">
+        <div class="parchment-page binding-page">
+          <div class="binding-content">
+            <div class="antique-press-animation">
+              <div class="press-arm"></div>
+              <div class="leather-book-icon">📖</div>
+              <div class="needle-thread-effect"></div>
+            </div>
+
+            <h2 class="binding-title">Binding Your Audiobook...</h2>
+            <p class="binding-sub">Our master bookbinder is stitching your manuscript into sound</p>
+
+            <div class="ribbon-progress-bar">
+              <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+            </div>
+
+            <div class="binding-status-log" id="bindingStatus">
+              <div class="status-line active">✦ Extracting manuscript pages...</div>
+            </div>
+
+            <div class="binding-facts">
+              <p>Did you know? Every sentence is cached by cryptographic hash so re-listening never consumes unnecessary
+                API credits.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SCREEN 6: THE LIBRARY (PLAYER & DOWNLOAD) ================= -->
+      <section class="screen" id="screen-6">
+        <div class="parchment-page library-page">
+          <div class="page-header">
+            <span class="chapter-num">Chapter IV</span>
+            <h2 class="page-heading">The Library</h2>
+            <p class="page-subheading">Your newly bound audiobook is ready</p>
+          </div>
+
+          <div class="library-layout">
+            <!-- Gramophone / Audio Player Console -->
+            <div class="player-console">
+              <div class="gramophone-turntable">
+                <div class="turntable-vinyl" id="turntableVinyl">
+                  <div class="vinyl-grooves"></div>
+                  <div class="vinyl-label">
+                    <span class="label-title" id="playerBookTitle">Book Title</span>
+                    <span class="label-voice" id="playerVoiceBadge">Kavya • Nalini</span>
+                  </div>
+                </div>
+                <div class="tonearm" id="tonearm"></div>
+              </div>
+
+              <!-- Audio Player Controls -->
+              <div class="audio-controls-block">
+                <audio id="mainAudio"></audio>
+
+                <div class="timeline-wrap">
+                  <span class="time-readout" id="currentTime">0:00</span>
+                  <input type="range" id="seekSlider" min="0" max="100" value="0">
+                  <span class="time-readout" id="totalDuration">0:00</span>
+                </div>
+
+                <div class="playback-buttons">
+                  <button class="ctrl-btn" id="btnBack10" title="Skip back 10s">↺ 10s</button>
+                  <button class="ctrl-btn play-main-btn" id="btnPlayPause" title="Play/Pause">
+                    <span id="playIcon">▶</span>
+                  </button>
+                  <button class="ctrl-btn" id="btnFwd10" title="Skip forward 10s">10s ↻</button>
+                </div>
+
+                <div class="player-actions">
+                  <a href="#" class="wooden-btn download-btn" id="btnDownload" download="audiobook.mp3">
+                    Download MP3 💾
+                  </a>
+                  <button class="wooden-btn secondary-btn" id="btn-new-book">
+                    Bind Another Volume 📚
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Manuscript Reader Beside Player -->
+            <div class="manuscript-reader">
+              <div class="reader-header">
+                <span class="quill-pin">✒️</span>
+                <h4>Original Text</h4>
+                <span class="badge-lang" id="readerLangBadge">English (en-IN)</span>
+              </div>
+              <div class="reader-text-scroll" id="readerText">
+                <!-- Text populated here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Session Shelf -->
+          <div class="session-shelf-wrap">
+            <h4 class="shelf-title">✦ Audiobooks Bound in this Session ✦</h4>
+            <div class="session-shelf-items" id="sessionShelf">
+              <!-- Dynamically added -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+
+</html>
