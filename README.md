@@ -1,4 +1,4 @@
-# KathaVaani (कथावाणी) 🎙️📖
+# KathaVaani  🎙️📖
 
 > *A vintage-bookshop web app turning written literature into soulful audiobooks in native Indian languages, powered by Gnani Timbre v2.5.*
 
